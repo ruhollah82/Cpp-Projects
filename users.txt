@@ -1,0 +1,6 @@
+0 Amir amir 1234 Customer 0 0
+0 qqq eee 1234 Customer 0 0
+0 mammad www 1234 Employee 1 0
+0 jjj mammad 1234 Customer 1 0
+0 ghghhg 44545 2323 Employee 1 0
+0 ahmad ddd 1234 Customer 0 0
