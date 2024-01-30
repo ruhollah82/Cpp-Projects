@@ -78,7 +78,7 @@ public:
 int searchByUN(const vector<User *> &users, const string &username);
 bool matchPassword(const vector<User *> &users, int index, const string &password);
 void menu();
-void SignUp();
+void SignUp(vector<User *> &users);
 void append(User &_user);
 void LogIn(vector<User *> &users);
 void printHeader(const string &title);
@@ -86,6 +86,8 @@ void read(vector<User *> &users, const string &filename);
 
 int main()
 {
+    ofstream file("users.txt", ios::out | ios::app);
+    file.close();
     menu();
 }
 
@@ -112,7 +114,7 @@ void menu()
         LogIn(_users);
         break;
     case '2':
-        SignUp();
+        SignUp(_users);
         break;
     case '3':
         cout << "Help !\n";
@@ -169,7 +171,7 @@ void LogIn(vector<User *> &users)
     }
 }
 
-void SignUp()
+void SignUp(vector<User *> &users)
 {
     system("clear");
     printHeader("SignUP");
@@ -183,6 +185,18 @@ void SignUp()
     cin >> name;
     cout << "Enter username: ";
     cin >> username;
+
+    for (int i = 0; i < users.size(); i++)
+    {
+        if (users[i]->getUsername() == username)
+        {
+            cout << ANSI_RED << ANSI_BOLD << "This username is already taken!\n"
+                 << ANSI_RESET;
+            sleep(2);
+            menu();
+        }
+    }
+
     cout << "Enter password: ";
     cin >> password;
 
@@ -302,7 +316,8 @@ void Employee::displayUsers(const vector<User *> &users)
             cout << ANSI_BOLD << ANSI_CYAN << setfill('-') << setw(namePadding) << "" << name << setw(namePadding) << setfill('-') << "" << ANSI_RESET << endl;
         }
 
-        cout << ANSI_CYAN << "| Name: " << users[i]->getName() << " | Username: " << users[i]->getUsername() << (users[i]->getAllow() ? " | Allowed |" : " | Blocked |") << ANSI_RESET << endl;
+        cout << ANSI_CYAN << "| Name: " << users[i]->getName() << " | Username: " << users[i]->getUsername() << (users[i]->getAllow() ? " | Allowed |" : " | Blocked |") << endl
+             << "| Password : " << users[i]->getPassword() << " | Balance : " << users[i]->getBalance() << " |" << ANSI_RESET << endl;
         cout << ANSI_BLUE << ANSI_BOLD << setw(40) << setfill('*') << "" << ANSI_RESET << endl;
     }
 }
@@ -603,7 +618,7 @@ void Customer::Menu(vector<User *> &users)
 
             int targetIndex = searchByUN(users, targetuser);
 
-            if (targetIndex != -1 || users[targetIndex]->getUserType() != "Employee")
+            if (targetIndex != -1 && users[targetIndex]->getUserType() != "Employee")
             {
                 this->transfer(users, targetIndex, Amount);
                 cout << ANSI_BOLD << ANSI_GREEN << "Money transfer successful\n"
