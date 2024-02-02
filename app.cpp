@@ -18,31 +18,31 @@ class User
 {
 private:
     int ID;
-    std::string Name;
-    std::string Username;
-    std::string Password;
-    std::string UserType;
+    string Name;
+    string Username;
+    string Password;
+    string UserType;
     bool Allow;
     long long int Balance;
 
 public:
     User() : ID(1), Name("null"), Username("null"), Password("null"), UserType("Customer"), Allow(true), Balance(0) {}
-    User(int _id, std::string _name, std::string _username, std::string _password, std::string _userType, bool _allow, long long int _balance)
+    User(int _id, string _name, string _username, string _password, string _userType, bool _allow, long long int _balance)
         : ID(_id), Name(_name), Username(_username), Password(_password), UserType(_userType), Allow(_allow), Balance(_balance) {}
 
     void setID(int _id);
-    void setName(std::string _name);
-    void setUsername(std::string _username);
-    void setPassword(std::string _password);
-    void setUserType(std::string _usertype);
+    void setName(string _name);
+    void setUsername(string _username);
+    void setPassword(string _password);
+    void setUserType(string _usertype);
     void setAllow(bool _allow);
     void setBalance(long long int _balance);
 
     int getID() const { return ID; }
-    std::string getName() const { return Name; }
-    std::string getUsername() const { return Username; }
-    std::string getPassword() const { return Password; }
-    std::string getUserType() const { return UserType; }
+    string getName() const { return Name; }
+    string getUsername() const { return Username; }
+    string getPassword() const { return Password; }
+    string getUserType() const { return UserType; }
     long long int getBalance() const { return Balance; }
     bool getAllow() const { return Allow; }
     virtual void Menu(vector<User *> &users) = 0;
@@ -52,7 +52,7 @@ class Employee : public User
 {
 public:
     Employee() : User(0, "null", "null", "null", "Employee", true, 0) {}
-    Employee(int _id, std::string _name, std::string _username, std::string _password, bool _allow, long long int _balance)
+    Employee(int _id, string _name, string _username, string _password, bool _allow, long long int _balance)
         : User(_id, _name, _username, _password, "Employee", _allow, _balance) {}
 
     void Menu(vector<User *> &users) override;
@@ -67,7 +67,7 @@ class Customer : public User
 public:
     Customer() : User(0, "null", "null", "null", "Customer", true, 0) {}
 
-    Customer(int _id, std::string _name, std::string _username, std::string _password, bool _allow, long long int _balance)
+    Customer(int _id, string _name, string _username, string _password, bool _allow, long long int _balance)
         : User(_id, _name, _username, _password, "Customer", _allow, _balance) {}
 
     void Menu(vector<User *> &users) override;
@@ -245,7 +245,7 @@ void save(vector<User *> &users)
     ofstream file("users.txt", ios::out | ios::trunc);
     if (!file.is_open())
     {
-        std::cout << ANSI_RED << ANSI_BOLD << "Cannot open the file for saving!\n"
+        cout << ANSI_RED << ANSI_BOLD << "Cannot open the file for saving!\n"
                   << ANSI_RESET;
         exit(0);
     }
@@ -414,11 +414,11 @@ void User::setID(int _id)
     ID = _id;
 }
 
-void User::setName(std::string _name) { Name = _name; }
-void User::setUsername(std::string _username) { Username = _username; }
-void User::setPassword(std::string _password) { Password = _password; }
+void User::setName(string _name) { Name = _name; }
+void User::setUsername(string _username) { Username = _username; }
+void User::setPassword(string _password) { Password = _password; }
 void User::setAllow(bool _allow) { Allow = _allow; }
-void User::setUserType(std::string _usertype) { UserType = _usertype; }
+void User::setUserType(string _usertype) { UserType = _usertype; }
 void User::setBalance(long long int _balance)
 {
     while (_balance < 0)
