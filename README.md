@@ -22,7 +22,7 @@ To run this program, you need:
 ## Usage
 
 1. Clone the repository to your local machine:
-git clone https://github.com/your_username/user-management-system.git
+git clone https://github.com/ruhollah82/Cpp-Projects.git
 
 2. Compile the code:
 g++ main.cpp -o user_management_system
