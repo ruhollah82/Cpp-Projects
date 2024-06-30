@@ -25,7 +25,7 @@ To run this program, you need:
 git clone https://github.com/ruhollah82/Cpp-Projects.git
 
 2. Compile the code:
-g++ main.cpp -o user_management_system
+g++ app.cpp -o user_management_system
 
 
 3. Run the executable:
